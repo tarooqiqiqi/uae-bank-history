@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UAE Bank History — تاريخ المصارف الإماراتية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="flag-motif" aria-hidden="true">
+    <div class="flag-red"></div>
+    <div class="flag-stripes">
+      <div class="stripe-green"></div>
+      <div class="stripe-white"></div>
+      <div class="stripe-black"></div>
+    </div>
+  </div>
+
+  <div class="gold-bar" aria-hidden="true"></div>
+
+  <svg class="geo-bg" aria-hidden="true" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#8a6c1e" stroke-width="0.8">
+      <rect x="75" y="75" width="150" height="150" transform="rotate(45 150 150)"/>
+      <rect x="98" y="98" width="104" height="104" transform="rotate(45 150 150)"/>
+      <rect x="121" y="121" width="58" height="58" transform="rotate(45 150 150)"/>
+      <line x1="150" y1="0" x2="150" y2="300"/>
+      <line x1="0" y1="150" x2="300" y2="150"/>
+      <line x1="0" y1="0" x2="300" y2="300"/>
+      <line x1="300" y1="0" x2="0" y2="300"/>
+      <circle cx="150" cy="150" r="90"/>
+      <circle cx="150" cy="150" r="52"/>
+      <circle cx="150" cy="150" r="18"/>
+    </g>
+  </svg>
+
+  <nav class="nav">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-diamond" aria-hidden="true"><div class="logo-diamond-inner"></div></div>
+      <div class="logo-text">
+        <span class="logo-en" data-en="UAE Bank History" data-ar="تاريخ المصارف الإماراتية">UAE Bank History</span>
+        <span class="logo-sub" data-en="تاريخ المصارف الإماراتية" data-ar="UAE Bank History">تاريخ المصارف الإماراتية</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="diagram.html" data-en="History diagram" data-ar="مخطط التاريخ">History diagram</a>
+      <a class="nav-link" href="index.html" data-en="Index" data-ar="الفهرس">Index</a>
+      <a class="nav-link" href="about.html" data-en="About" data-ar="عن الموقع">About</a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+        <button class="lang-btn" id="btn-ar" onclick="setLang('ar')" aria-pressed="false">عربي</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-eyebrow" data-en="An independent archive" data-ar="أرشيف مستقل">An independent archive</div>
+      <h1 class="hero-title" data-en="The history of<br>UAE banking" data-ar="تاريخ المصارف<br>في الإمارات العربية المتحدة">The history of<br>UAE banking</h1>
+      <span class="hero-title-ar" data-en="تاريخ المصارف في الإمارات" data-ar="The history of UAE banking">تاريخ المصارف في الإمارات</span>
+      <p class="hero-body" data-en="An independent archive tracing the mergers, acquisitions, and evolution of banks across the United Arab Emirates — from the pre-union era to the present day." data-ar="أرشيف مستقل يتتبع عمليات الاندماج والاستحواذ وتطور المصارف في الإمارات العربية المتحدة — من مرحلة ما قبل الاتحاد حتى يومنا هذا.">An independent archive tracing the mergers, acquisitions, and evolution of banks across the United Arab Emirates — from the pre-union era to the present day.</p>
+      <div class="hero-ctas">
+        <a href="diagram.html" class="cta-primary" data-en="View diagram" data-ar="عرض المخطط">View diagram</a>
+        <a href="#banks" class="cta-secondary" data-en="Browse index →" data-ar="تصفح الفهرس ←">Browse index →</a>
+      </div>
+    </div>
+    <aside class="hero-aside">
+      <div class="aside-label" data-en="In numbers" data-ar="بالأرقام">In numbers</div>
+      <div class="stat-row">
+        <span class="stat-num">46+</span>
+        <span class="stat-lbl" data-en="banks documented" data-ar="مصرف موثق">banks documented</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-num">1960s</span>
+        <span class="stat-lbl" data-en="earliest records" data-ar="أقدم السجلات">earliest records</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-num">18+</span>
+        <span class="stat-lbl" data-en="mergers &amp; acquisitions" data-ar="عملية اندماج واستحواذ">mergers &amp; acquisitions</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="featured-banks" id="banks">
+    <div class="fb-label" data-en="Featured banks" data-ar="مصارف مميزة">Featured banks</div>
+    <div class="fb-grid">
+      <a href="banks/emirates-nbd.html" class="fb-card">
+        <div class="fb-en">Emirates NBD</div>
+        <div class="fb-ar">بنك الإمارات دبي الوطني</div>
+        <div class="fb-tag" data-en="Merger · 2007" data-ar="اندماج · 2007">Merger · 2007</div>
+      </a>
+      <a href="#" class="fb-card fb-coming-soon">
+        <div class="fb-en">First Abu Dhabi Bank</div>
+        <div class="fb-ar">بنك أبوظبي الأول</div>
+        <div class="fb-tag" data-en="Merger · 2017" data-ar="اندماج · 2017">Merger · 2017</div>
+      </a>
+      <a href="#" class="fb-card fb-coming-soon">
+        <div class="fb-en">Mashreq</div>
+        <div class="fb-ar">بنك المشرق</div>
+        <div class="fb-tag" data-en="Est. 1967" data-ar="تأسس عام 1967">Est. 1967</div>
+      </a>
+      <a href="#" class="fb-card fb-coming-soon">
+        <div class="fb-en">Dubai Islamic Bank</div>
+        <div class="fb-ar">بنك دبي الإسلامي</div>
+        <div class="fb-tag" data-en="Est. 1975" data-ar="تأسس عام 1975">Est. 1975</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="section-row">
+    <div class="section-cell">
+      <div class="sc-label" data-en="Featured entry" data-ar="مدخل مميز">Featured entry</div>
+      <div class="sc-title" data-en="The making of Emirates NBD" data-ar="نشأة بنك الإمارات دبي الوطني">The making of Emirates NBD</div>
+      <p class="sc-body" data-en="The 2007 merger of Emirates Bank International and National Bank of Dubai created the UAE's largest bank by assets — a defining moment in the consolidation of Gulf finance." data-ar="أدى اندماج بنك الإمارات الدولي مع بنك دبي الوطني عام 2007 إلى تأسيس أكبر مصرف في الإمارات من حيث الأصول — لحظة فارقة في مسيرة توطيد القطاع المالي الخليجي.">The 2007 merger of Emirates Bank International and National Bank of Dubai created the UAE's largest bank by assets — a defining moment in the consolidation of Gulf finance.</p>
+      <a href="banks/emirates-nbd.html" class="sc-link" data-en="Read the history →" data-ar="اقرأ التاريخ ←">Read the history →</a>
+    </div>
+    <div class="section-cell">
+      <div class="sc-label" data-en="History diagram" data-ar="مخطط التاريخ">History diagram</div>
+      <div class="sc-title" data-en="Mergers &amp; acquisitions, mapped" data-ar="خارطة الاندماجات والاستحواذات">Mergers &amp; acquisitions, mapped</div>
+      <p class="sc-body" data-en="An interactive diagram tracing every significant merger, acquisition, and rebranding across UAE banking — from the earliest colonial-era institutions to the present." data-ar="مخطط تفاعلي يتتبع كل عمليات الاندماج والاستحواذ وإعادة العلامات التجارية في القطاع المصرفي الإماراتي — من أقدم المؤسسات إلى يومنا هذا.">An interactive diagram tracing every significant merger, acquisition, and rebranding across UAE banking — from the earliest colonial-era institutions to the present.</p>
+      <a href="diagram.html" class="sc-link" data-en="Explore the diagram →" data-ar="استكشف المخطط ←">Explore the diagram →</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© Tariq Albastaki 2026 — <span data-en="an independent archival project" data-ar="مشروع أرشيفي مستقل">an independent archival project</span></span>
+    <span class="footer-ar">تاريخ المصارف الإماراتية</span>
+  </footer>
+
+  <script src="lang.js"></script>
+</body>
+</html>
