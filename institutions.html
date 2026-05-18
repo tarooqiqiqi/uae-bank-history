@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index — Emirates Banking Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .index-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 44px 32px 80px 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .index-header {
+      margin-bottom: 36px;
+    }
+
+    .index-eyebrow {
+      font-size: 10px; letter-spacing: 0.22em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .index-eyebrow::after {
+      content: ''; display: block; width: 36px;
+      height: 0.5px; background: var(--gold);
+    }
+    html[dir="rtl"] .index-eyebrow { flex-direction: row-reverse; }
+    html[dir="rtl"] .index-eyebrow::after { display: none; }
+
+    .index-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 400; color: var(--ink);
+      margin: 0 0 6px;
+    }
+    html[dir="rtl"] .index-title {
+      font-family: 'Scheherazade New', serif; font-size: 28px;
+    }
+    .index-title-ar {
+      font-family: 'Scheherazade New', serif;
+      font-size: 22px; color: rgba(28,43,30,0.32);
+      display: block; margin-bottom: 20px; line-height: 1.5;
+    }
+    html[dir="rtl"] .index-title-ar {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-style: italic;
+    }
+
+    .scope-note {
+      font-size: 13px; line-height: 1.85;
+      color: rgba(28,43,30,0.58); font-weight: 300;
+      max-width: 620px;
+      padding: 16px 20px;
+      border-left: 2px solid rgba(138,108,30,0.35);
+      background: rgba(138,108,30,0.04);
+      border-radius: 0 2px 2px 0;
+      margin-bottom: 32px;
+    }
+    html[dir="rtl"] .scope-note {
+      border-left: none;
+      border-right: 2px solid rgba(138,108,30,0.35);
+      border-radius: 2px 0 0 2px;
+    }
+
+    /* Controls */
+    .index-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative; flex: 1; min-width: 200px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 13px; font-weight: 300;
+      border: 0.5px solid rgba(28,43,30,0.18);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 2px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .search-input:focus { border-color: rgba(138,108,30,0.5); }
+    .search-icon {
+      position: absolute; left: 10px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px; color: rgba(28,43,30,0.35);
+      pointer-events: none;
+    }
+    html[dir="rtl"] .search-input { padding: 8px 32px 8px 12px; }
+    html[dir="rtl"] .search-icon { left: auto; right: 10px; }
+
+    .filter-group {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 0.5px solid rgba(28,43,30,0.18);
+      background: transparent; color: rgba(28,43,30,0.5);
+      cursor: pointer; border-radius: 2px;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.12s;
+    }
+    .filter-btn:hover { border-color: rgba(138,108,30,0.4); color: var(--ink); }
+    .filter-btn.active {
+      background: var(--ink); color: var(--sand);
+      border-color: var(--ink);
+    }
+    .filter-btn.active.f-ongoing { background: #1c6b38; border-color: #1c6b38; }
+    .filter-btn.active.f-defunct { background: rgba(28,43,30,0.5); border-color: transparent; }
+    .filter-btn.active.f-national { background: #8a6c1e; border-color: #8a6c1e; }
+    .filter-btn.active.f-foreign  { background: #5a4a8a; border-color: #5a4a8a; }
+
+    /* Count */
+    .index-count {
+      font-size: 11px; color: rgba(28,43,30,0.38);
+      letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+
+    /* Table */
+    .index-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .index-table thead tr {
+      border-bottom: 0.5px solid rgba(28,43,30,0.18);
+    }
+
+    .index-table th {
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 400; padding: 0 12px 10px 0;
+      text-align: left; white-space: nowrap;
+      cursor: pointer; user-select: none;
+    }
+    html[dir="rtl"] .index-table th { text-align: right; padding: 0 0 10px 12px; }
+    .index-table th:hover { color: var(--ink); }
+    .index-table th .sort-arrow { opacity: 0.4; margin-left: 4px; font-size: 9px; }
+    .index-table th.sorted .sort-arrow { opacity: 1; color: var(--gold); }
+
+    .index-table tbody tr {
+      border-bottom: 0.5px solid rgba(28,43,30,0.07);
+      transition: background 0.1s;
+      cursor: pointer;
+    }
+    .index-table tbody tr:hover { background: rgba(138,108,30,0.04); }
+    .index-table tbody tr.hidden { display: none; }
+
+    .index-table td {
+      padding: 12px 12px 12px 0;
+      font-size: 13px; font-weight: 300;
+      color: rgba(28,43,30,0.7);
+      vertical-align: middle;
+    }
+    html[dir="rtl"] .index-table td { padding: 12px 0 12px 12px; text-align: right; }
+
+    .td-name { font-weight: 500; color: var(--ink); }
+    .td-name-ar {
+      font-family: 'Scheherazade New', serif;
+      font-size: 14px; color: rgba(28,43,30,0.38);
+      display: block; line-height: 1.4; margin-top: 2px;
+    }
+
+    .td-year { font-family: 'Playfair Display', serif; font-size: 14px; white-space: nowrap; }
+
+    .tag {
+      display: inline-block;
+      font-size: 9px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 7px;
+      border-radius: 2px; font-weight: 400;
+      margin-right: 4px; white-space: nowrap;
+    }
+    .tag-ongoing  { background: rgba(28,107,56,0.1);  color: #1c6b38; }
+    .tag-defunct  { background: rgba(28,43,30,0.08);  color: rgba(28,43,30,0.5); }
+    .tag-national { background: rgba(138,108,30,0.12); color: #6b5218; }
+    .tag-foreign  { background: rgba(90,74,138,0.1);  color: #3d3270; }
+
+    .td-link {
+      font-size: 11px; color: var(--gold);
+      letter-spacing: 0.04em; text-decoration: none;
+      border-bottom: 0.5px solid rgba(138,108,30,0.3);
+      padding-bottom: 1px; white-space: nowrap;
+    }
+    .td-link:hover { color: var(--ink); border-color: var(--ink); }
+    .td-link.no-page {
+      color: rgba(28,43,30,0.22); border-color: transparent;
+      pointer-events: none;
+    }
+
+    /* No results */
+    .no-results {
+      display: none; padding: 40px 0;
+      font-size: 14px; color: rgba(28,43,30,0.38);
+      font-style: italic; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="flag-motif" aria-hidden="true">
+    <div class="flag-red"></div>
+    <div class="flag-stripes">
+      <div class="stripe-green"></div>
+      <div class="stripe-white"></div>
+      <div class="stripe-black"></div>
+    </div>
+  </div>
+  <div class="gold-bar" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-diamond" aria-hidden="true"><div class="logo-diamond-inner"></div></div>
+      <div class="logo-text">
+        <span data-en="Emirates Banking Archive" data-ar="أرشيف مصارف الإمارات">Emirates Banking Archive</span>
+        <span class="logo-sub" data-en="أرشيف مصارف الإمارات" data-ar="Emirates Banking Archive">أرشيف مصارف الإمارات</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a class="nav-link" href="diagram.html" data-en="Diagram" data-ar="المخطط">Diagram</a>
+      <a class="nav-link" href="about.html" data-en="About" data-ar="عن الموقع">About</a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+        <button class="lang-btn" id="btn-ar" onclick="setLang('ar')" aria-pressed="false">عربي</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="index-wrap">
+
+    <header class="index-header">
+      <div class="index-eyebrow" data-en="Emirates Banking Archive" data-ar="أرشيف مصارف الإمارات">Emirates Banking Archive</div>
+      <h1 class="index-title" data-en="Index of institutions" data-ar="فهرس المؤسسات">Index of institutions</h1>
+      <span class="index-title-ar" data-en="فهرس المؤسسات" data-ar="Index of institutions">فهرس المؤسسات</span>
+      <p class="scope-note" data-en="The institutions listed here are those documented so far. The archive aims to cover all national banks — those founded within the UAE — together with foreign institutions whose presence was significant to the development of banking in the region. Coverage will expand over time." data-ar="المؤسسات المدرجة هنا هي تلك الموثقة حتى الآن. يهدف الأرشيف إلى تغطية جميع المصارف الوطنية — تلك التي تأسست داخل الإمارات — إلى جانب المؤسسات الأجنبية التي كان حضورها مؤثراً في تطور العمل المصرفي في المنطقة. ستتوسع التغطية بمرور الوقت.">The institutions listed here are those documented so far. The archive aims to cover all national banks — those founded within the UAE — together with foreign institutions whose presence was significant to the development of banking in the region. Coverage will expand over time.</p>
+    </header>
+
+    <div class="index-controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="search" type="text"
+          placeholder="Search institutions…"
+          data-en-placeholder="Search institutions…"
+          data-ar-placeholder="ابحث عن مؤسسة…"
+          oninput="filterTable()">
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn f-all active" data-filter="all" onclick="setFilter('all', this)" data-en="All" data-ar="الكل">All</button>
+        <button class="filter-btn f-ongoing" data-filter="ongoing" onclick="setFilter('ongoing', this)" data-en="Ongoing" data-ar="قائم">Ongoing</button>
+        <button class="filter-btn f-defunct" data-filter="defunct" onclick="setFilter('defunct', this)" data-en="Defunct" data-ar="منتهٍ">Defunct</button>
+        <button class="filter-btn f-national" data-filter="national" onclick="setFilter('national', this)" data-en="National" data-ar="وطني">National</button>
+        <button class="filter-btn f-foreign" data-filter="foreign" onclick="setFilter('foreign', this)" data-en="Foreign" data-ar="أجنبي">Foreign</button>
+      </div>
+    </div>
+
+    <div class="index-count" id="index-count"></div>
+
+    <table class="index-table" id="index-table">
+      <thead>
+        <tr>
+          <th onclick="sortBy('name')" data-en="Institution" data-ar="المؤسسة">Institution <span class="sort-arrow">↕</span></th>
+          <th onclick="sortBy('year')" data-en="Founded" data-ar="تأسست">Founded <span class="sort-arrow">↕</span></th>
+          <th data-en="Status" data-ar="الحالة">Status</th>
+          <th data-en="Type" data-ar="النوع">Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+    <div class="no-results" id="no-results" data-en="No institutions match your search." data-ar="لا توجد مؤسسات تطابق بحثك.">No institutions match your search.</div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© Tariq Albastaki 2026 — <span data-en="an independent archival project" data-ar="مشروع أرشيفي مستقل">an independent archival project</span></span>
+    <span class="footer-ar">أرشيف مصارف الإمارات</span>
+  </footer>
+
+  <script>
+  // ── Institution data ───────────────────────────────────────────────────────
+  // status: 'ongoing' | 'defunct'
+  // type:   'national' | 'foreign'
+  // page:   relative path or null
+
+  const INSTITUTIONS = [
+    // A
+    { name: "Abu Dhabi Commercial Bank",           nameAr: "بنك أبوظبي التجاري",               year: 1985, status: "ongoing", type: "national",         note: "Formed from merger of Emirates Commercial Bank and Federal Commercial Bank", page: null },
+    { name: "Abu Dhabi Islamic Bank",              nameAr: "مصرف أبوظبي الإسلامي",             year: 1997, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "Ajman Bank",                          nameAr: "بنك عجمان",                         year: 2009, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "Al Ahli Bank",                        nameAr: "البنك الأهلي",                      year: 1969, status: "defunct", type: "national",         note: "Founded in Dubai; acquired by Al Ahli Bank of Kuwait in 2008", page: null },
+    { name: "Al Ahli Bank of Kuwait",              nameAr: "البنك الأهلي الكويتي",              year: 2008, status: "ongoing", type: "foreign",          note: "Acquired Al Ahli Bank (Dubai) in 2008; continues to operate in the UAE", page: null },
+    { name: "Al Hilal Bank",                       nameAr: "بنك الهلال",                        year: 2008, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "Al Masraf",                           nameAr: "المصرف",                            year: 1976, status: "ongoing", type: "national",         note: "Originally Arab Bank for Investment and Foreign Trade", page: null },
+    { name: "Al Maryah Community Bank",            nameAr: "بنك المريّة المجتمعي",              year: 2021, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "ANZ Grindlays Bank",                  nameAr: "بنك إيه إن زد غرندلايز",           year: 1984, status: "defunct", type: "foreign",          note: "Acquired by Standard Chartered in 2000", page: null },
+    // B
+    { name: "Bank of Credit and Commerce International", nameAr: "بنك الاعتماد والتجارة الدولي", year: 1972, status: "defunct", type: "national",      note: "BCCI; collapsed in 1991; re-established as Union National Bank", page: null },
+    { name: "Bank of Sharjah",                     nameAr: "مصرف الشارقة",                      year: 1973, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "Bank of the Arab Coast",              nameAr: "بنك الساحل العربي",                 year: 1976, status: "defunct", type: "national",         note: "Re-established as Commercial Bank International in 1991", page: null },
+    { name: "British Bank of Iran and the Middle East", nameAr: "البنك البريطاني لإيران والشرق الأوسط", year: 1949, status: "defunct", type: "foreign", note: "Renamed British Bank of the Middle East in 1952", page: null },
+    { name: "British Bank of the Middle East",     nameAr: "البنك البريطاني للشرق الأوسط",      year: 1952, status: "defunct", type: "foreign",          note: "Acquired by HSBC in 1959; renamed HSBC Bank Middle East in 1999", page: null },
+    // C
+    { name: "Citibank",                            nameAr: "سيتي بنك",                          year: 1976, status: "ongoing", type: "foreign",          note: "Formerly First National City Bank", page: null },
+    { name: "Commercial Bank International",       nameAr: "البنك التجاري الدولي",              year: 1991, status: "ongoing", type: "national",         note: "Re-established from Bank of the Arab Coast", page: null },
+    { name: "Commercial Bank of Dubai",            nameAr: "بنك دبي التجاري",                   year: 1969, status: "ongoing", type: "national",         note: null, page: null },
+    // D
+    { name: "Dubai Bank (first)",                  nameAr: "بنك دبي (الأول)",                   year: 1975, status: "defunct", type: "national",         note: "Acquired by Emirates Bank International c.1980", page: null },
+    { name: "Dubai Bank (second)",                 nameAr: "بنك دبي (الثاني)",                  year: 2002, status: "defunct", type: "national",         note: "Acquired by Emirates NBD in 2012", page: null },
+    { name: "Dubai Islamic Bank",                  nameAr: "بنك دبي الإسلامي",                  year: 1975, status: "ongoing", type: "national",         note: "Acquired Noor Bank in 2020", page: null },
+    // E
+    { name: "Eastern Bank",                        nameAr: "البنك الشرقي",                      year: 1958, status: "defunct", type: "foreign",          note: "Part of Chartered Bank Group; merged to form Standard Chartered in 1969", page: null },
+    { name: "Emirates Bank International",         nameAr: "بنك الإمارات الدولي",               year: 1978, status: "defunct", type: "national",         note: "Merged with National Bank of Dubai to form Emirates NBD in 2007", page: "banks/emirates-nbd.html" },
+    { name: "Emirates Commercial Bank",            nameAr: "بنك الإمارات التجاري",              year: 1977, status: "defunct", type: "national",         note: "Merged to form Abu Dhabi Commercial Bank in 1985", page: null },
+    { name: "Emirates Islamic Bank",               nameAr: "مصرف الإمارات الإسلامي",            year: 2004, status: "ongoing", type: "national",         note: "Re-established from Middle East Bank", page: null },
+    { name: "Emirates National Bank",              nameAr: "بنك الإمارات الوطني",               year: 1978, status: "defunct", type: "national",         note: "Acquired by Emirates Bank International c.1980", page: null },
+    { name: "Emirates NBD",                        nameAr: "بنك الإمارات دبي الوطني",           year: 2007, status: "ongoing", type: "national",         note: "Formed from merger of Emirates Bank International and National Bank of Dubai", page: "banks/emirates-nbd.html" },
+    // F
+    { name: "Federal Commercial Bank",             nameAr: "البنك التجاري الاتحادي",            year: 1975, status: "defunct", type: "national",         note: "Merged to form Abu Dhabi Commercial Bank in 1985", page: null },
+    { name: "First Abu Dhabi Bank",                nameAr: "بنك أبوظبي الأول",                  year: 2017, status: "ongoing", type: "national",         note: "Formed from merger of National Bank of Abu Dhabi and First Gulf Bank", page: null },
+    { name: "First Gulf Bank",                     nameAr: "بنك الخليج الأول",                  year: 1979, status: "defunct", type: "national",         note: "Re-established from Ajman Arab Bank; merged to form First Abu Dhabi Bank in 2017", page: null },
+    { name: "First National City Bank",            nameAr: "بنك المدينة الوطني الأول",          year: 1964, status: "defunct", type: "foreign",          note: "Renamed Citibank in 1976", page: null },
+    // H
+    { name: "HSBC",                                nameAr: "إتش إس بي سي",                     year: 1999, status: "ongoing", type: "foreign",          note: "Formerly HSBC Bank Middle East; traces lineage to Imperial Bank of Iran (1946)", page: null },
+    { name: "HSBC Bank Middle East",               nameAr: "بنك إتش إس بي سي الشرق الأوسط",   year: 1999, status: "defunct", type: "foreign",          note: "Renamed HSBC; previously British Bank of the Middle East", page: null },
+    // I
+    { name: "Imperial Bank of Iran",               nameAr: "بنك إيران الإمبراطوري",             year: 1946, status: "defunct", type: "foreign",          note: "Opened Dubai branch 1946; renamed British Bank of Iran and the Middle East in 1949", page: null },
+    { name: "Invest Bank",                         nameAr: "إنفست بنك",                         year: 1975, status: "ongoing", type: "national",         note: "Originally Investment Bank for Trade and Finance; renamed 1997", page: null },
+    // K
+    { name: "Khalij Commercial Bank",              nameAr: "بنك الخليج التجاري",                year: 1977, status: "defunct", type: "national",         note: "Later renamed Union National Bank; acquired by ADCB in 2019", page: null },
+    // M
+    { name: "Mashreq",                             nameAr: "بنك المشرق",                        year: 1967, status: "ongoing", type: "national",         note: "Originally Bank of Oman; renamed Mashreq Bank in 1993", page: null },
+    { name: "Middle East Bank",                    nameAr: "بنك الشرق الأوسط",                  year: 1976, status: "defunct", type: "national",         note: "Acquired by Emirates Bank International in 1991; re-established as Emirates Islamic Bank in 2004", page: "banks/emirates-nbd.html" },
+    // N
+    { name: "National Bank of Abu Dhabi",          nameAr: "بنك أبوظبي الوطني",                 year: 1968, status: "defunct", type: "national",         note: "Merged to form First Abu Dhabi Bank in 2017", page: null },
+    { name: "National Bank of Dubai",              nameAr: "بنك دبي الوطني",                    year: 1963, status: "defunct", type: "national",         note: "Merged with Emirates Bank International to form Emirates NBD in 2007", page: "banks/emirates-nbd.html" },
+    { name: "National Bank of Fujairah",           nameAr: "بنك الفجيرة الوطني",                year: 1982, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "National Bank of Ras Al Khaimah",     nameAr: "بنك رأس الخيمة الوطني",             year: 1976, status: "defunct", type: "national",         note: "Rebranded as RAKBANK in 2001", page: null },
+    { name: "National Bank of Sharjah",            nameAr: "بنك الشارقة الوطني",                year: 1976, status: "defunct", type: "national",         note: "Re-established as Sharjah Islamic Bank in 2002", page: null },
+    { name: "National Bank of Umm Al Qaiwain",     nameAr: "بنك أم القيوين الوطني",             year: 1982, status: "ongoing", type: "national",         note: null, page: null },
+    { name: "Noor Bank",                           nameAr: "بنك نور",                           year: 2014, status: "defunct", type: "national",         note: "Originally Noor Islamic Bank (2008); acquired by Dubai Islamic Bank in 2020", page: null },
+    { name: "Noor Islamic Bank",                   nameAr: "بنك نور الإسلامي",                  year: 2008, status: "defunct", type: "national",         note: "Renamed Noor Bank in 2014", page: null },
+    // O
+    { name: "Ottoman Bank",                        nameAr: "البنك العثماني",                    year: 1962, status: "defunct", type: "foreign",          note: "Opened Abu Dhabi branch 1962; acquired by National & Grindlays Bank in 1969", page: null },
+    // R
+    { name: "RAKBANK",                             nameAr: "راك بنك",                           year: 2001, status: "ongoing", type: "national",         note: "Formerly National Bank of Ras Al Khaimah", page: null },
+    { name: "Ruya Community Islamic Bank",         nameAr: "مصرف رؤية المجتمعي الإسلامي",       year: 2024, status: "ongoing", type: "national",         note: "Established in Ajman", page: null },
+    // S
+    { name: "Sharjah Islamic Bank",                nameAr: "مصرف الشارقة الإسلامي",             year: 2002, status: "ongoing", type: "national",         note: "Re-established from National Bank of Sharjah", page: null },
+    { name: "Standard Chartered",                  nameAr: "ستاندرد تشارترد",                   year: 1969, status: "ongoing", type: "foreign",          note: "Formed from merger of Chartered Bank and Standard Bank; also absorbed ANZ Grindlays in 2000", page: null },
+    // U
+    { name: "Union Bank of the Middle East",       nameAr: "بنك الاتحاد للشرق الأوسط",         year: 1977, status: "defunct", type: "national",         note: "Renamed Emirates Bank International in 1978", page: null },
+    { name: "Union National Bank",                 nameAr: "بنك الاتحاد الوطني",               year: 1991, status: "defunct", type: "national",         note: "Re-established from BCCI; formerly Khalij Commercial Bank; acquired by ADCB in 2019", page: null },
+    { name: "United Arab Bank",                    nameAr: "بنك الإمارات العربية المتحدة",      year: 1975, status: "ongoing", type: "national",         note: null, page: null },
+    // W
+    { name: "Wio Bank",                            nameAr: "ويو بنك",                           year: 2022, status: "ongoing", type: "national",         note: "Established in Abu Dhabi", page: null },
+  ];
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let activeFilter = 'all';
+  let sortKey = 'name';
+  let sortAsc = true;
+  let currentLang = 'en';
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+  function tagHtml(status, type) {
+    const statusTag = status === 'ongoing'
+      ? `<span class="tag tag-ongoing" data-en="Ongoing" data-ar="قائم">Ongoing</span>`
+      : `<span class="tag tag-defunct" data-en="Defunct" data-ar="منتهٍ">Defunct</span>`;
+    let typeTag = '';
+    if (type === 'national') {
+      typeTag = `<span class="tag tag-national" data-en="National" data-ar="وطني">National</span>`;
+    } else if (type === 'foreign') {
+      typeTag = `<span class="tag tag-foreign" data-en="Foreign" data-ar="أجنبي">Foreign</span>`;
+    }
+    return { statusTag, typeTag };
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '';
+
+    const sorted = [...INSTITUTIONS].sort((a, b) => {
+      let va = sortKey === 'year' ? a.year : a.name.toLowerCase();
+      let vb = sortKey === 'year' ? b.year : b.name.toLowerCase();
+      if (va < vb) return sortAsc ? -1 : 1;
+      if (va > vb) return sortAsc ? 1 : -1;
+      return 0;
+    });
+
+    sorted.forEach(inst => {
+      const { statusTag, typeTag } = tagHtml(inst.status, inst.type);
+      const linkHtml = inst.page
+        ? `<a href="${inst.page}" class="td-link" data-en="View entry →" data-ar="عرض المدخل ←">View entry →</a>`
+        : `<span class="td-link no-page" data-en="Coming soon" data-ar="قريباً">Coming soon</span>`;
+
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-name', inst.name.toLowerCase());
+      tr.setAttribute('data-name-ar', inst.nameAr);
+      tr.setAttribute('data-status', inst.status);
+      tr.setAttribute('data-type', inst.type);
+
+      tr.innerHTML = `
+        <td class="td-name">
+          ${inst.name}
+          <span class="td-name-ar">${inst.nameAr}</span>
+        </td>
+        <td class="td-year">${inst.year}</td>
+        <td>${statusTag}</td>
+        <td>${typeTag}</td>
+        <td>${linkHtml}</td>
+      `;
+
+      if (inst.page) {
+        tr.style.cursor = 'pointer';
+        tr.addEventListener('click', e => {
+          if (!e.target.closest('a')) window.location.href = inst.page;
+        });
+      }
+
+      tbody.appendChild(tr);
+    });
+
+    applyFilters();
+    applyLangToRows();
+  }
+
+  function applyFilters() {
+    const q = document.getElementById('search').value.toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('#table-body tr').forEach(tr => {
+      const name = tr.getAttribute('data-name') || '';
+      const nameAr = tr.getAttribute('data-name-ar') || '';
+      const status = tr.getAttribute('data-status');
+      const type = tr.getAttribute('data-type');
+
+      const matchSearch = !q || name.includes(q) || nameAr.includes(q);
+      const matchFilter = activeFilter === 'all'
+        || activeFilter === status
+        || activeFilter === type;
+
+      const show = matchSearch && matchFilter;
+      tr.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    const countEl = document.getElementById('index-count');
+    const total = INSTITUTIONS.length;
+    countEl.textContent = currentLang === 'ar'
+      ? `عرض ${visible} من أصل ${total} مؤسسة`
+      : `Showing ${visible} of ${total} institutions`;
+
+    document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function filterTable() { applyFilters(); }
+
+  function setFilter(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function sortBy(key) {
+    if (sortKey === key) sortAsc = !sortAsc;
+    else { sortKey = key; sortAsc = key === 'name'; }
+    document.querySelectorAll('.index-table th').forEach(th => th.classList.remove('sorted'));
+    const ths = document.querySelectorAll('.index-table th');
+    ths.forEach(th => {
+      if ((key === 'name' && th.textContent.includes('Institution')) ||
+          (key === 'year' && th.textContent.includes('Founded'))) {
+        th.classList.add('sorted');
+        th.querySelector('.sort-arrow').textContent = sortAsc ? '↑' : '↓';
+      }
+    });
+    renderTable();
+  }
+
+  function applyLangToRows() {
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+      const val = currentLang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+      if (val) el.textContent = val;
+    });
+    const searchEl = document.getElementById('search');
+    searchEl.placeholder = currentLang === 'ar'
+      ? searchEl.getAttribute('data-ar-placeholder')
+      : searchEl.getAttribute('data-en-placeholder');
+  }
+
+  // Hook into lang.js setLang
+  const _origSetLang = window.setLang;
+  window.setLang = function(lang) {
+    currentLang = lang;
+    if (_origSetLang) _origSetLang(lang);
+    applyFilters();
+    applyLangToRows();
+  };
+
+  renderTable();
+  </script>
+  <script src="lang.js"></script>
+</body>
+</html>
