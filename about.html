@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Emirates Banking Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 52px 32px 80px 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-eyebrow {
+      font-size: 10px; letter-spacing: 0.22em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .about-eyebrow::after {
+      content: ''; display: block; width: 36px; height: 0.5px; background: var(--gold);
+    }
+    html[dir="rtl"] .about-eyebrow { flex-direction: row-reverse; }
+    html[dir="rtl"] .about-eyebrow::after { display: none; }
+
+    .about-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 400; color: var(--ink);
+      margin: 0 0 6px; line-height: 1.2;
+    }
+    html[dir="rtl"] .about-title { font-family: 'Scheherazade New', serif; font-size: 28px; }
+
+    .about-title-ar {
+      font-family: 'Scheherazade New', serif;
+      font-size: 22px; color: rgba(28,43,30,0.32);
+      display: block; margin-bottom: 40px; line-height: 1.5;
+    }
+    html[dir="rtl"] .about-title-ar {
+      font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic;
+    }
+
+    .about-section { margin-bottom: 44px; }
+
+    .about-section-label {
+      font-size: 10px; letter-spacing: 0.2em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 0.5px solid rgba(138,108,30,0.2);
+    }
+
+    .about-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; font-weight: 400; color: var(--ink);
+      margin: 0 0 14px; line-height: 1.3;
+    }
+    html[dir="rtl"] .about-section-title { font-family: 'Scheherazade New', serif; font-size: 21px; }
+
+    .about-body {
+      font-size: 14px; line-height: 1.9;
+      color: rgba(28,43,30,0.65); font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .about-body strong { font-weight: 500; color: var(--ink); }
+
+    .about-divider {
+      border: none;
+      border-top: 0.5px solid rgba(28,43,30,0.1);
+      margin: 44px 0;
+    }
+
+    .about-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .meta-block { }
+    .meta-label {
+      font-size: 10px; letter-spacing: 0.16em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 13px; color: rgba(28,43,30,0.65); font-weight: 300; line-height: 1.7;
+    }
+    .meta-value a {
+      color: var(--ink); border-bottom: 0.5px solid rgba(28,43,30,0.3);
+      text-decoration: none; padding-bottom: 1px;
+    }
+    .meta-value a:hover { color: var(--gold); border-color: var(--gold); }
+
+    .contact-note {
+      margin-top: 40px;
+      padding: 18px 20px;
+      border: 0.5px solid rgba(138,108,30,0.25);
+      background: rgba(138,108,30,0.03);
+      border-radius: 2px;
+      font-size: 13px; line-height: 1.8;
+      color: rgba(28,43,30,0.6); font-weight: 300;
+    }
+    .contact-note strong { font-weight: 500; color: var(--ink); }
+  </style>
+</head>
+<body>
+
+  <div class="flag-motif" aria-hidden="true">
+    <div class="flag-red"></div>
+    <div class="flag-stripes">
+      <div class="stripe-green"></div>
+      <div class="stripe-white"></div>
+      <div class="stripe-black"></div>
+    </div>
+  </div>
+  <div class="gold-bar" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-diamond" aria-hidden="true"><div class="logo-diamond-inner"></div></div>
+      <div class="logo-text">
+        <span data-en="Emirates Banking Archive" data-ar="أرشيف مصارف الإمارات">Emirates Banking Archive</span>
+        <span class="logo-sub" data-en="أرشيف مصارف الإمارات" data-ar="Emirates Banking Archive">أرشيف مصارف الإمارات</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a class="nav-link" href="institutions.html" data-en="Index" data-ar="الفهرس">Index</a>
+      <a class="nav-link" href="about.html" data-en="About" data-ar="عن الموقع">About</a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+        <button class="lang-btn" id="btn-ar" onclick="setLang('ar')" aria-pressed="false">عربي</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="about-wrap">
+
+    <div class="about-eyebrow" data-en="Emirates Banking Archive" data-ar="أرشيف مصارف الإمارات">Emirates Banking Archive</div>
+    <h1 class="about-title" data-en="About this archive" data-ar="عن هذا الأرشيف">About this archive</h1>
+    <span class="about-title-ar" data-en="عن هذا الأرشيف" data-ar="About this archive">عن هذا الأرشيف</span>
+
+    <div class="about-section">
+      <div class="about-section-label" data-en="The project" data-ar="المشروع">The project</div>
+      <h2 class="about-section-title" data-en="Why this archive exists" data-ar="لماذا هذا الأرشيف">Why this archive exists</h2>
+      <p class="about-body" data-en="[Placeholder — to be written in your own words.] The UAE's banking history is, in many ways, the story of the country itself — a rapid transformation from a handful of foreign branches serving the pearl and oil trades into one of the most sophisticated financial systems in the world, all within the span of a single lifetime. This archive grew out of a personal interest in documenting that story properly, in both Arabic and English, and making it accessible to anyone curious about how the country's financial institutions came to be." data-ar="[نص مؤقت — يُكتب بأسلوبك الخاص.] يعكس تاريخ المصارف في الإمارات، في كثير من وجوهه، قصة البلاد ذاتها — تحوّل سريع من حفنة من الفروع الأجنبية التي كانت تخدم تجارة اللؤلؤ والنفط، إلى واحدة من أكثر المنظومات المالية تطوراً في العالم، وكل ذلك في غضون جيل واحد. نشأ هذا الأرشيف من اهتمام شخصي بتوثيق تلك القصة توثيقاً جاداً، باللغتين العربية والإنجليزية، وإتاحتها لكل من يرغب في فهم كيف تشكّلت المؤسسات المالية في هذه البلاد.">[Placeholder — to be written in your own words.] The UAE's banking history is, in many ways, the story of the country itself — a rapid transformation from a handful of foreign branches serving the pearl and oil trades into one of the most sophisticated financial systems in the world, all within the span of a single lifetime. This archive grew out of a personal interest in documenting that story properly, in both Arabic and English, and making it accessible to anyone curious about how the country's financial institutions came to be.</p>
+      <p class="about-body" data-en="It is an independent project, unaffiliated with any bank, institution, or government body. All research is conducted from public sources." data-ar="هذا مشروع مستقل، لا ينتمي إلى أي مصرف أو مؤسسة أو جهة حكومية. تستند جميع الأبحاث إلى مصادر متاحة للعموم.">It is an independent project, unaffiliated with any bank, institution, or government body. All research is conducted from public sources.</p>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-label" data-en="Methodology" data-ar="المنهجية">Methodology</div>
+      <h2 class="about-section-title" data-en="Sources and approach" data-ar="المصادر والمنهج">Sources and approach</h2>
+      <p class="about-body" data-en="[Placeholder.] Each entry draws on a combination of official bank histories, central bank records, contemporary press coverage, and published academic and financial literature. Where exact dates are uncertain, this is noted within the relevant entry. The archive is bilingual by design — Arabic is not a translation layer but an equal voice, and where the two languages diverge in nuance, both are preserved." data-ar="[نص مؤقت.] يستند كل مدخل إلى مزيج من التواريخ الرسمية للمصارف، وسجلات المصرف المركزي، والتغطيات الصحفية المعاصرة، والأدبيات الأكاديمية والمالية المنشورة. حيثما تكون التواريخ الدقيقة غير مؤكدة، يُشار إلى ذلك في المدخل المعني. الأرشيف ثنائي اللغة بحكم تصميمه — فالعربية ليست طبقة ترجمة بل صوت مستقل بذاته، وحيثما تتباين اللغتان في الدلالة، يُحتفظ بكلتيهما.">[Placeholder.] Each entry draws on a combination of official bank histories, central bank records, contemporary press coverage, and published academic and financial literature. Where exact dates are uncertain, this is noted within the relevant entry. The archive is bilingual by design — Arabic is not a translation layer but an equal voice, and where the two languages diverge in nuance, both are preserved.</p>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-label" data-en="Scope" data-ar="النطاق">Scope</div>
+      <h2 class="about-section-title" data-en="What is and isn't covered" data-ar="ما يشمله الأرشيف وما لا يشمله">What is and isn't covered</h2>
+      <p class="about-body" data-en="The archive currently documents all national banks founded within the UAE, together with a small number of foreign institutions whose early presence was formative to the development of banking in the region. It does not attempt to cover every foreign bank that has operated in the country. Coverage will deepen and expand as research progresses." data-ar="يوثّق الأرشيف حالياً جميع المصارف الوطنية التي تأسست داخل الإمارات، إلى جانب عدد محدود من المؤسسات الأجنبية التي كان حضورها المبكر محورياً في تطور العمل المصرفي في المنطقة. ولا يسعى الأرشيف إلى تغطية كل مصرف أجنبي عمل في البلاد. ستتعمق التغطية وتتوسع مع تقدم البحث.">The archive currently documents all national banks founded within the UAE, together with a small number of foreign institutions whose early presence was formative to the development of banking in the region. It does not attempt to cover every foreign bank that has operated in the country. Coverage will deepen and expand as research progresses.</p>
+    </div>
+
+    <hr class="about-divider">
+
+    <div class="about-meta">
+      <div class="meta-block">
+        <div class="meta-label" data-en="Author" data-ar="المؤلف">Author</div>
+        <div class="meta-value">Tariq Albastaki</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label" data-en="Last updated" data-ar="آخر تحديث">Last updated</div>
+        <div class="meta-value">2026</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label" data-en="Sister project" data-ar="مشروع شقيق">Sister project</div>
+        <div class="meta-value">
+          <a href="https://buildingsocietyhistory.co.uk" target="_blank" rel="noopener">buildingsocietyhistory.co.uk</a>
+        </div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label" data-en="Domain" data-ar="الموقع">Domain</div>
+        <div class="meta-value">
+          <a href="https://emiratesbankingarchive.com">emiratesbankingarchive.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-note">
+      <strong data-en="Corrections and contributions" data-ar="التصحيحات والمساهمات">Corrections and contributions</strong><br>
+      <span data-en="If you have spotted an error, know of a source that would improve an entry, or have a personal or institutional connection to any of the banks documented here, please get in touch. [Contact details to be added.]" data-ar="إن لاحظت خطأً، أو تعرف مصدراً من شأنه تحسين أحد المدخلات، أو تربطك صلة شخصية أو مؤسسية بأيٍّ من المصارف الموثقة هنا، يسعدني التواصل معك. [تفاصيل التواصل ستُضاف لاحقاً.]">If you have spotted an error, know of a source that would improve an entry, or have a personal or institutional connection to any of the banks documented here, please get in touch. [Contact details to be added.]</span>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© Tariq Albastaki 2026 — <span data-en="an independent archival project" data-ar="مشروع أرشيفي مستقل">an independent archival project</span></span>
+    <span class="footer-ar">أرشيف مصارف الإمارات</span>
+  </footer>
+
+  <script src="lang.js"></script>
+</body>
+</html>
