@@ -2,7 +2,7 @@
 
 An independent bilingual (English / Arabic) archive tracing the mergers, acquisitions, and evolution of banks across the United Arab Emirates.
 
-**[uaebankhistory.ae](https://uaebankhistory.ae)** *(coming soon)*
+**[emiratesbankingarchive.com/](https://emiratesbankingarchive.com/)** *(coming soon)*
 
 ---
 
