@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Society History</title>
+<meta name="description" content="Tracing every merger, renaming, and dissolution across two centuries of British building societies — one institution at a time.">
+<meta property="og:title" content="Building Society History">
+<meta property="og:description" content="Tracing every merger, renaming, and dissolution across two centuries of British building societies — one institution at a time.">
+<meta property="og:url" content="https://buildingsocietyhistory.co.uk/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://buildingsocietyhistory.co.uk/">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0ece4;
+  --surface:#e8e3da;
+  --surface2:#ddd8ce;
+  --border:#c8c0b0;
+  --text:#2a2520;
+  --muted:#7a7060;
+  --accent:#5570b0;
+  --accent-light:rgba(85,112,176,0.1);
+}
+
+/* ── Base ── */
+body{background:var(--bg);color:var(--text);font-family:'Source Sans 3',sans-serif;min-height:100vh}
+
+/* ── Header ── */
+header{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:0 28px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.site-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.header-logo{height:26px;width:26px;flex-shrink:0}
+.nav-pills{display:flex;gap:6px;align-items:center}
+.nav-pill{
+  padding:5px 14px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--muted);
+  text-decoration:none;
+  transition:background 0.15s,color 0.15s;
+}
+.nav-pill:hover{background:var(--surface2);color:var(--text)}
+
+/* global search in header */
+.header-search-wrap{position:relative}
+.header-search-input{
+  padding:5px 14px 5px 32px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:inherit;
+  font-size:0.8rem;
+  width:180px;
+  outline:none;
+  transition:border-color 0.15s,width 0.2s;
+}
+.header-search-input:focus{border-color:var(--accent);width:230px}
+.header-search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--muted);pointer-events:none}
+.header-search-results{
+  position:absolute;top:calc(100% + 6px);right:0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  max-height:300px;
+  overflow-y:auto;
+  display:none;
+  z-index:200;
+  width:280px;
+}
+.header-search-results.open{display:block}
+.search-result-item{
+  display:block;
+  padding:8px 14px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:0.82rem;
+  border-bottom:1px solid var(--border);
+  transition:background 0.1s;
+}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover{background:var(--surface2)}
+.search-no-results{padding:10px 14px;color:var(--muted);font-size:0.82rem;font-style:italic}
+
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;border:none;background:none}
+.hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px}
+.mobile-nav{display:none;position:absolute;top:52px;right:0;left:0;background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;flex-direction:column;gap:8px;z-index:99}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:8px 0;color:var(--text);text-decoration:none;font-size:0.88rem;border-bottom:1px solid var(--border)}
+.mobile-nav a:last-child{border-bottom:none}
+
+/* ── Hero ── */
+.hero{
+  border-bottom:1px solid var(--border);
+  padding:60px 48px 52px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+/* subtle ruled-paper texture */
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    var(--border) 27px,
+    var(--border) 28px
+  );
+  opacity:0.25;
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+.hero-logo{width:72px;height:72px;margin:0 auto 20px;display:block;opacity:0.9}
+.hero-eyebrow{
+  font-size:0.7rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.18em;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:700;
+  line-height:1.1;
+  color:var(--text);
+  margin-bottom:18px;
+}
+.hero-lede{
+  font-size:1.05rem;
+  line-height:1.85;
+  color:var(--muted);
+  max-width:560px;
+  margin:0 auto 28px;
+}
+.hero-lede strong{color:var(--text);font-weight:600}
+
+/* stat strip */
+.stat-strip{
+  display:inline-flex;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:var(--surface);
+  overflow:hidden;
+  margin-bottom:32px;
+}
+.stat-item{
+  padding:10px 24px;
+  text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  display:block;
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.1;
+}
+.stat-label{
+  display:block;
+  font-size:0.65rem;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* hero CTA row */
+.hero-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  padding:10px 24px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:22px;
+  text-decoration:none;
+  font-size:0.85rem;
+  font-weight:600;
+  transition:background 0.15s,transform 0.1s;
+}
+.btn-primary:hover{background:#4460a0;transform:translateY(-1px)}
+.btn-ghost{
+  padding:10px 24px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:22px;
+  text-decoration:none;
+  font-size:0.85rem;
+  font-weight:600;
+  transition:background 0.15s,transform 0.1s;
+}
+.btn-ghost:hover{background:var(--surface2);transform:translateY(-1px)}
+
+/* ── Sections wrapper ── */
+.sections{max-width:1100px;margin:0 auto;padding:0 48px}
+
+/* section header */
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom:20px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:0.88rem;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--muted);
+}
+.sec-link{
+  font-size:0.78rem;
+  color:var(--accent);
+  text-decoration:none;
+}
+.sec-link:hover{text-decoration:underline}
+
+/* ── What is this? ── */
+.explainer{
+  padding:48px 0 40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:start;
+}
+.explainer-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:700;
+  line-height:1.3;
+  margin-bottom:14px;
+  color:var(--text);
+}
+.explainer-text p{
+  font-size:0.9rem;
+  line-height:1.9;
+  color:#4a4540;
+  margin-bottom:12px;
+}
+.explainer-text p:last-child{margin-bottom:0}
+.explainer-facts{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.fact-item{display:flex;gap:14px;align-items:flex-start}
+.fact-icon{
+  width:34px;height:34px;flex-shrink:0;
+  border-radius:8px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.fact-text{font-size:0.82rem;line-height:1.65;color:var(--muted)}
+.fact-text strong{color:var(--text);font-weight:600;display:block;margin-bottom:1px}
+
+/* ── Recently completed ── */
+.recently-section{padding-bottom:44px}
+.update-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px 20px;
+  margin-bottom:16px;
+}
+.update-card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.update-badge{
+  font-size:0.68rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+  padding:2px 8px;
+  border-radius:10px;
+  background:var(--surface2);
+  color:var(--muted);
+  border:1px solid var(--border);
+}
+.update-date{font-size:0.75rem;color:var(--muted)}
+.recent-pills{display:flex;flex-wrap:wrap;gap:8px}
+.recent-pill{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 12px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:0.78rem;
+  font-weight:600;
+  transition:background 0.12s;
+}
+.recent-pill:hover{background:var(--surface2)}
+.recent-pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.current-research{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+  font-size:0.78rem;
+  color:var(--muted);
+  line-height:1.7;
+}
+.current-research strong{color:var(--text);font-weight:600}
+
+/* ── Featured societies ── */
+.featured-section{padding-bottom:44px}
+.featured-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.featured-card{
+  display:flex;
+  flex-direction:column;
+  padding:20px 16px 18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:3px solid var(--fc,var(--border));
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--text);
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.featured-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+.featured-logo-wrap{height:52px;display:flex;align-items:center;justify-content:flex-start;margin-bottom:14px}
+.featured-logo{max-height:48px;max-width:110px;object-fit:contain}
+.featured-name{
+  font-family:'Playfair Display',serif;
+  font-size:0.88rem;
+  font-weight:700;
+  line-height:1.3;
+  margin-bottom:6px;
+  color:var(--text);
+}
+.featured-meta{font-size:0.72rem;color:var(--muted);line-height:1.5}
+.featured-snippet{
+  margin-top:10px;
+  font-size:0.77rem;
+  line-height:1.65;
+  color:#5a5550;
+  flex:1;
+}
+.featured-more{
+  margin-top:12px;
+  font-size:0.75rem;
+  color:var(--accent);
+  font-weight:600;
+}
+
+/* ── All societies grid ── */
+.all-section{padding-bottom:56px}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+  gap:12px;
+}
+.society-card{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:20px 14px 16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:3px solid var(--group-color,var(--border));
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--text);
+  position:relative;
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.society-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+.card-logo-wrap{height:56px;display:flex;align-items:center;justify-content:center;width:100%}
+.card-logo{max-height:56px;max-width:120px;object-fit:contain;width:100%}
+.card-name{font-size:0.78rem;font-weight:600;text-align:center;line-height:1.35;color:var(--text)}
+.badge{position:absolute;top:8px;right:8px;font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 6px;border-radius:8px}
+.badge-wip{background:#f5e8c0;color:#7a6020;border:1px solid #e0c870}
+.badge-planned{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.badge-demutualised{background:#e8e0f0;color:#5a3a8a;border:1px solid #c8b8e0}
+
+/* demutualised section */
+.demutualiseds{padding-bottom:56px}
+
+/* ── Footer ── */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:24px;
+  text-align:center;
+  font-size:0.72rem;
+  color:var(--muted);
+  line-height:1.9;
+}
+
+/* ── Modals ── */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(40,35,30,0.5);
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;max-width:380px;width:100%;
+  padding:28px;box-shadow:0 8px 32px rgba(0,0,0,0.15);
+}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:10px;color:var(--text)}
+.modal-body{font-size:0.87rem;line-height:1.75;color:var(--muted);margin-bottom:20px}
+.modal-close{padding:7px 18px;border:1px solid var(--border);border-radius:16px;background:var(--surface2);color:var(--text);font-family:inherit;font-size:0.82rem;cursor:pointer}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .featured-grid{grid-template-columns:1fr 1fr}
+  .explainer{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .hero{padding:40px 20px 36px}
+  .sections{padding:0 16px}
+  .stat-strip{flex-wrap:wrap;border-radius:12px}
+  .stat-item{padding:8px 16px;border-right:none;border-bottom:1px solid var(--border)}
+  .stat-item:last-child{border-bottom:none}
+  .featured-grid{grid-template-columns:1fr 1fr}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .nav-pills,.header-search-wrap{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:480px){
+  .featured-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ HEADER ════════════════════════════════ -->
+<header>
+  <a href="index.html" class="site-title">
+    <img src="building-society-history-logo.svg" alt="" class="header-logo">
+    Building Society History
+  </a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="header-search-wrap">
+      <span class="header-search-icon">🔍</span>
+      <input type="search" class="header-search-input" id="header-search" placeholder="Search societies…" autocomplete="off">
+      <div class="header-search-results" id="header-search-results"></div>
+    </div>
+    <nav class="nav-pills">
+      <a href="societies/list.html" class="nav-pill">Societies</a>
+      <a href="map.html" class="nav-pill">Map</a>
+      <a href="progress.html" class="nav-pill">Progress</a>
+      <a href="about.html" class="nav-pill">About</a>
+    </nav>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="societies/list.html">Societies</a>
+    <a href="map.html">Map</a>
+    <a href="progress.html">Progress</a>
+    <a href="about.html">About</a>
+  </div>
+</header>
+
+<!-- ════════════════════════════════ HERO ══════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <img src="building-society-history-logo.svg" alt="Building Society History logo" class="hero-logo">
+    <p class="hero-eyebrow">A British Mutual Finance Archive</p>
+    <h1>Building Society<br>History</h1>
+    <p class="hero-lede">
+      Over <strong>2,000 building societies</strong> have existed in Britain since the 1770s.
+      Here is what happened to every one of them — every merger, renaming, demutualisation,
+      and dissolution, traced institution by institution.
+    </p>
+    <div class="stat-strip">
+      <div class="stat-item">
+        <span class="stat-num">42</span>
+        <span class="stat-label">Societies active today</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">176</span>
+        <span class="stat-label">Histories published</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">495</span>
+        <span class="stat-label">Societies documented</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">250+</span>
+        <span class="stat-label">Years of history</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="list.html" class="btn-primary">Browse all societies</a>
+      <a href="map.html" class="btn-ghost">Explore the merger map</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ BODY ══════════════════════════════════ -->
+<div class="sections">
+
+  <!-- What is this project? -->
+  <div class="explainer">
+    <div class="explainer-text">
+      <h2>Two and a half centuries of mergers, traced institution by institution.</h2>
+      <p>The British building society sector has been shaped by an extraordinary and largely undocumented process of consolidation. Hundreds of local mutual lenders — many founded in the nineteenth century to serve specific towns, trades, or communities — were gradually absorbed into larger institutions over the course of the twentieth century.</p>
+      <p>This project traces that process in full: every merger, transfer of engagements, renaming, and dissolution, documented with primary sources and presented as a connected institutional history.</p>
+      <a href="about.html" style="font-size:0.84rem;color:var(--accent);text-decoration:none;font-weight:600">Read more about the project &rarr;</a>
+    </div>
+    <div class="explainer-facts">
+      <div class="fact-item">
+        <div class="fact-icon">🏛️</div>
+        <div class="fact-text">
+          <strong>Founded in mutual self-help</strong>
+          Early societies were terminating clubs, wound up once members owned their homes. The permanent building society model emerged in the 1840s.
+        </div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-icon">🔀</div>
+        <div class="fact-text">
+          <strong>Decades of consolidation</strong>
+          From over 2,000 societies in the Victorian era, mergers reduced the sector to fewer than 50 today.
+        </div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-icon">📄</div>
+        <div class="fact-text">
+          <strong>Demutualisation wave</strong>
+          Between 1989 and 2000, several major societies converted to banks or were acquired, ending their mutual status permanently.
+        </div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-icon">🗂️</div>
+        <div class="fact-text">
+          <strong>Independent research</strong>
+          Sources include the BSA, FCA Mutuals Register, British Newspaper Archive, and individual society publications.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recently updated -->
+  <div class="recently-section">
+    <div class="sec-head">
+      <span class="sec-title">Recently updated</span>
+      <a href="progress.html" class="sec-link">See all progress &rarr;</a>
+    </div>
+    <div class="update-card">
+      <div class="update-card-header">
+        <span class="update-badge">Latest additions</span>
+        <span class="update-date">May 2026</span>
+      </div>
+      <div class="recent-pills">
+        <a href="societies/coventry.html" class="recent-pill">
+          <span class="recent-pill-dot" style="background:#196ef7"></span>Coventry
+        </a>
+        <a href="societies/bath-investment.html" class="recent-pill">
+          <span class="recent-pill-dot" style="background:#bb1432"></span>Bath
+        </a>
+        <a href="societies/beverley.html" class="recent-pill">
+          <span class="recent-pill-dot" style="background:#af5d29"></span>Beverley
+        </a>
+        <a href="societies/buckinghamshire.html" class="recent-pill">
+          <span class="recent-pill-dot" style="background:#572885"></span>Buckinghamshire
+        </a>
+      </div>
+      <div class="current-research">
+        <strong>Currently in active research:</strong> societies within the lineages of
+        <strong>Darlington</strong> through to <strong>Monmouthshire</strong>, and the extensive
+        lineage of <strong>Nationwide Building Society</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured societies -->
+  <div class="featured-section">
+    <div class="sec-head">
+      <span class="sec-title">Featured histories</span>
+      <a href="list.html" class="sec-link">View all &rarr;</a>
+    </div>
+    <div class="featured-grid">
+      <a href="societies/coventry.html" class="featured-card" style="--fc:#196ef7">
+        <div class="featured-logo-wrap">
+          <img src="logos/coventry.png" alt="Coventry Building Society" class="featured-logo">
+        </div>
+        <div class="featured-name">Coventry Building Society</div>
+        <div class="featured-meta">Est. 1884 &middot; Ongoing &middot; 60+ predecessors</div>
+        <p class="featured-snippet">One of the most complex merger lineages in the sector, absorbing dozens of local societies across the Midlands over more than a century.</p>
+        <span class="featured-more">Read history &rarr;</span>
+      </a>
+      <a href="societies/cumberland.html" class="featured-card" style="--fc:#004C45">
+        <div class="featured-logo-wrap">
+          <img src="logos/cumberland.png" alt="Cumberland Building Society" class="featured-logo">
+        </div>
+        <div class="featured-name">Cumberland Building Society</div>
+        <div class="featured-meta">Est. 1850 &middot; Ongoing &middot; North-west England</div>
+        <p class="featured-snippet">A regional mutual with deep roots in the Lake District and Cumbria, tracing a lineage back to the mid-Victorian era.</p>
+        <span class="featured-more">Read history &rarr;</span>
+      </a>
+      <a href="societies/bath-investment.html" class="featured-card" style="--fc:#bb1432">
+        <div class="featured-logo-wrap">
+          <img src="logos/bath-investment-logo.png" alt="Bath Investment &amp; Building Society" class="featured-logo">
+        </div>
+        <div class="featured-name">Bath Investment &amp; Building Society</div>
+        <div class="featured-meta">Est. 1852 &middot; Ongoing &middot; South-west England</div>
+        <p class="featured-snippet">One of Britain's oldest surviving independent building societies, serving Bath and the surrounding region continuously for over 170 years.</p>
+        <span class="featured-more">Read history &rarr;</span>
+      </a>
+      <a href="societies/cambridge.html" class="featured-card" style="--fc:#c33a83">
+        <div class="featured-logo-wrap">
+          <img src="logos/cambridge.png" alt="Cambridge Building Society" class="featured-logo">
+        </div>
+        <div class="featured-name">Cambridge Building Society</div>
+        <div class="featured-meta">Est. 1850 &middot; Ongoing &middot; East of England</div>
+        <p class="featured-snippet">A mutual lender rooted in Cambridge for over 175 years, with a lineage that includes several smaller Cambridgeshire societies.</p>
+        <span class="featured-more">Read history &rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- All existing societies -->
+  <div class="all-section">
+    <div class="sec-head">
+      <span class="sec-title">Existing building societies</span>
+      <a href="list.html" class="sec-link">Full index &rarr;</a>
+    </div>
+    <div class="cards-grid">
+<a href="societies/bath-investment.html" class="society-card" style="--group-color:#bb1432"><div class="card-logo-wrap"><img src="logos/bath-investment-logo.png" alt="Bath Investment &amp; Building Society logo" class="card-logo"></div><span class="card-name">Bath Investment &amp; Building Society</span></a>
+<a href="societies/beverley.html" class="society-card" style="--group-color:#af5d29"><div class="card-logo-wrap"><img src="logos/beverley.png" alt="Beverley Building Society logo" class="card-logo"></div><span class="card-name">Beverley Building Society</span></a>
+<a href="societies/buckinghamshire.html" class="society-card" style="--group-color:#572885"><div class="card-logo-wrap"><img src="logos/buckinghamshire.png" alt="Buckinghamshire Building Society logo" class="card-logo"></div><span class="card-name">Buckinghamshire Building Society</span></a>
+<a href="societies/cambridge.html" class="society-card" style="--group-color:#c33a83"><div class="card-logo-wrap"><img src="logos/cambridge.png" alt="Cambridge Building Society logo" class="card-logo"></div><span class="card-name">Cambridge Building Society</span></a>
+<a href="societies/chorley-district.html" class="society-card" style="--group-color:#622473"><div class="card-logo-wrap"><img src="logos/chorley-district.png" alt="Chorley &amp; District Building Society logo" class="card-logo"></div><span class="card-name">Chorley &amp; District Building Society</span></a>
+<a href="societies/coventry.html" class="society-card" style="--group-color:#196ef7"><div class="card-logo-wrap"><img src="logos/coventry.png" alt="Coventry Building Society logo" class="card-logo"></div><span class="card-name">Coventry Building Society</span></a>
+<a href="societies/cumberland.html" class="society-card" style="--group-color:#004C45"><div class="card-logo-wrap"><img src="logos/cumberland.png" alt="Cumberland Building Society logo" class="card-logo"></div><span class="card-name">Cumberland Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#AC145A;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/darlington.svg" alt="Darlington Building Society logo" class="card-logo"></div><span class="card-name">Darlington Building Society</span><div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--border);border-radius:0 0 10px 10px"><div style="width:25%;height:3px;background:#AC145A;border-radius:0 0 0 10px"></div></div></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#D60078;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/dudley.png" alt="Dudley Building Society logo" class="card-logo"></div><span class="card-name">Dudley Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#004990;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/earl-shilton.png" alt="Earl Shilton Building Society logo" class="card-logo"></div><span class="card-name">Earl Shilton Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#00312E;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/ecology.png" alt="Ecology Building Society logo" class="card-logo"></div><span class="card-name">Ecology Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#7FBCAA;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/family.png" alt="Family Building Society logo" class="card-logo"></div><span class="card-name">Family Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#FC9BC1;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/furness.png" alt="Furness Building Society logo" class="card-logo"></div><span class="card-name">Furness Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#00539F;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/hanley-economic.png" alt="Hanley Economic Building Society logo" class="card-logo"></div><span class="card-name">Hanley Economic Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#1E7560;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/harpenden.jpg" alt="Harpenden Building Society logo" class="card-logo"></div><span class="card-name">Harpenden Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#F9AF3C;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/hinckley-rugby.svg" alt="Hinckley &amp; Rugby Building Society logo" class="card-logo"></div><span class="card-name">Hinckley &amp; Rugby Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#182745;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/leeds.png" alt="Leeds Building Society logo" class="card-logo"></div><span class="card-name">Leeds Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#3AAA35;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/leek-united.svg" alt="Leek United Building Society logo" class="card-logo"></div><span class="card-name">Leek United Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#3AAA35;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/loughborough.png" alt="Loughborough Building Society logo" class="card-logo"></div><span class="card-name">Loughborough Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#73B943;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/mansfield.png" alt="Mansfield Building Society logo" class="card-logo"></div><span class="card-name">Mansfield Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#CE0060;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/market-harborough.png" alt="Market Harborough Building Society logo" class="card-logo"></div><span class="card-name">Market Harborough Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#E6007E;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/marsden.webp" alt="Marsden Building Society logo" class="card-logo"></div><span class="card-name">Marsden Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#4BB8A9;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/melton-mowbray.png" alt="Melton Mowbray Building Society logo" class="card-logo"></div><span class="card-name">Melton Mowbray Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#E25F00;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/monmouthshire.png" alt="Monmouthshire Building Society logo" class="card-logo"></div><span class="card-name">Monmouthshire Building Society</span></a>
+<a href="javascript:void(0)" onclick="showWipModal(event)" class="society-card" style="--group-color:#F9383D;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-wip">In progress</span><div class="card-logo-wrap"><img src="logos/nationwide.png" alt="Nationwide Building Society logo" class="card-logo"></div><span class="card-name">Nationwide Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#003865;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/newbury.png" alt="Newbury Building Society logo" class="card-logo"></div><span class="card-name">Newbury Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#165788;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/newcastle.png" alt="Newcastle Building Society logo" class="card-logo"></div><span class="card-name">Newcastle Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#00F295;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/nottingham.png" alt="Nottingham Building Society logo" class="card-logo"></div><span class="card-name">Nottingham Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#CE122D;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/penrith.png" alt="Penrith Building Society logo" class="card-logo"></div><span class="card-name">Penrith Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#8B0556;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/principality.webp" alt="Principality Building Society logo" class="card-logo"></div><span class="card-name">Principality Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#E03228;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/progressive.png" alt="Progressive Building Society logo" class="card-logo"></div><span class="card-name">Progressive Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#461963;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/saffron.png" alt="Saffron Building Society logo" class="card-logo"></div><span class="card-name">Saffron Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#2057B2;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/scottish.png" alt="Scottish Building Society logo" class="card-logo"></div><span class="card-name">Scottish Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#0072C5;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/skipton.png" alt="Skipton Building Society logo" class="card-logo"></div><span class="card-name">Skipton Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#EB600A;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/stafford.png" alt="Stafford Railway Building Society logo" class="card-logo"></div><span class="card-name">Stafford Railway Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#71A8A0;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/suffolk.png" alt="Suffolk Building Society logo" class="card-logo"></div><span class="card-name">Suffolk Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#007E36;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/swansea.png" alt="Swansea Building Society logo" class="card-logo"></div><span class="card-name">Swansea Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#EA6669;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/teachers.png" alt="Teachers Building Society logo" class="card-logo"></div><span class="card-name">Teachers Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#2FB457;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/tipton-coseley.png" alt="Tipton &amp; Coseley Building Society logo" class="card-logo"></div><span class="card-name">Tipton &amp; Coseley Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#009FA0;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/vernon.png" alt="Vernon Building Society logo" class="card-logo"></div><span class="card-name">Vernon Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#994DFB;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/west-bromwich.webp" alt="West Bromwich Building Society logo" class="card-logo"></div><span class="card-name">West Bromwich Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#068844;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/yorkshire.svg" alt="Yorkshire Building Society logo" class="card-logo"></div><span class="card-name">Yorkshire Building Society</span></a>
+    </div>
+  </div>
+
+  <!-- Demutualised section -->
+  <div class="demutualiseds">
+    <div class="sec-head">
+      <span class="sec-title">Demutualised &amp; converted societies</span>
+    </div>
+    <div class="cards-grid">
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/abbey-national.png" alt="Abbey National Building Society logo" class="card-logo"></div><span class="card-name">Abbey National Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/alliance-leicester.png" alt="Alliance &amp; Leicester Building Society logo" class="card-logo"></div><span class="card-name">Alliance &amp; Leicester Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/birmingham-midshires.png" alt="Birmingham Midshires Building Society logo" class="card-logo"></div><span class="card-name">Birmingham Midshires Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/bradford-bingley.webp" alt="Bradford &amp; Bingley Building Society logo" class="card-logo"></div><span class="card-name">Bradford &amp; Bingley Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/cheltenham-gloucester.webp" alt="Cheltenham &amp; Gloucester Building Society logo" class="card-logo"></div><span class="card-name">Cheltenham &amp; Gloucester Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/halifax.png" alt="Halifax Building Society logo" class="card-logo"></div><span class="card-name">Halifax Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#50213F;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/kent-reliance.png" alt="Kent Reliance Building Society logo" class="card-logo"></div><span class="card-name">Kent Reliance Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/national-provincial.webp" alt="National &amp; Provincial Building Society logo" class="card-logo"></div><span class="card-name">National &amp; Provincial Building Society</span></a>
+<a href="javascript:void(0)" onclick="showPlannedModal(event)" class="society-card" style="--group-color:#888;opacity:0.6;cursor:pointer;filter:grayscale(0.3)"><span class="badge badge-planned">Planned</span><div class="card-logo-wrap"><img src="logos/woolwich.webp" alt="Woolwich Building Society logo" class="card-logo"></div><span class="card-name">Woolwich Building Society</span></a>
+    </div>
+  </div>
+
+</div><!-- /sections -->
+
+<!-- ════════════════════════════════ FOOTER ════════════════════════════════ -->
+<footer>
+  <p>&copy; Tariq Albastaki 2026. Building Society History is an independent archival project documenting the history and evolution of British building societies and mutual financial institutions. Research draws upon public sources including the Building Societies Association, the FCA Mutuals Public Register, the British Newspaper Archive, local historical records, and individual society publications. Logos are used for identification and historical reference purposes only and remain the property of their respective owners.</p>
+</footer>
+
+<!-- ════════════════════════════════ MODALS ════════════════════════════════ -->
+<div id="wip-modal" class="modal-backdrop">
+  <div class="modal-box">
+    <p class="modal-title">Work in progress</p>
+    <p class="modal-body">This group is currently being researched and written up. Check back soon &mdash; or <a href="progress.html" style="color:#5570b0;text-decoration:none">see the progress page</a> for an overview of what has been completed so far.</p>
+    <button class="modal-close" onclick="document.getElementById('wip-modal').style.display='none'">Close</button>
+  </div>
+</div>
+<div id="planned-modal" class="modal-backdrop">
+  <div class="modal-box">
+    <p class="modal-title">Coming soon</p>
+    <p class="modal-body">This group is planned for a future stage of the archive and has not been researched yet. See the <a href="progress.html" style="color:#5570b0;text-decoration:none">progress page</a> for an overview of what is in the pipeline.</p>
+    <button class="modal-close" onclick="document.getElementById('planned-modal').style.display='none'">Close</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ SCRIPTS ════════════════════════════════ -->
+<script>
+// Society data for search
+const SOCIETIES = [{"id":"abbey-national","name":"Abbey National Building Society","group":"Abbey National"},{"id":"accrington-district-permanent-benefit","name":"Accrington & District Permanent Benefit Building Society","group":"Nationwide"},{"id":"alliance-leicester","name":"Alliance & Leicester Building Society","group":"Alliance & Leicester"},{"id":"bath-county","name":"Bath & County Building Society","group":"Bath"},{"id":"bath-investment","name":"Bath Investment & Building Society","group":"Bath"},{"id":"beverley","name":"Beverley Building Society","group":"Beverley"},{"id":"birmingham-midshires","name":"Birmingham Midshires Building Society","group":"Birmingham Midshires"},{"id":"bradford-bingley","name":"Bradford & Bingley Building Society","group":"Bradford & Bingley"},{"id":"buckinghamshire","name":"Buckinghamshire Building Society","group":"Buckinghamshire"},{"id":"cambridge","name":"Cambridge Building Society","group":"Cambridge"},{"id":"cheltenham-gloucester","name":"Cheltenham & Gloucester Building Society","group":"Cheltenham & Gloucester"},{"id":"chorley-district","name":"Chorley & District Building Society","group":"Chorley"},{"id":"coventry","name":"Coventry Building Society","group":"Coventry"},{"id":"cumberland","name":"Cumberland Building Society","group":"Cumberland"},{"id":"darlington","name":"Darlington Building Society","group":"Darlington"},{"id":"dudley","name":"Dudley Building Society","group":"Dudley"},{"id":"earl-shilton","name":"Earl Shilton Building Society","group":"Earl Shilton"},{"id":"ecology","name":"Ecology Building Society","group":"Ecology"},{"id":"family","name":"Family Building Society","group":"Family"},{"id":"furness","name":"Furness Building Society","group":"Furness"},{"id":"halifax","name":"Halifax Building Society","group":"Halifax"},{"id":"hanley-economic","name":"Hanley Economic Building Society","group":"Hanley"},{"id":"harpenden","name":"Harpenden Building Society","group":"Harpenden"},{"id":"hinckley-rugby","name":"Hinckley & Rugby Building Society","group":"Hinckley & Rugby"},{"id":"kent-reliance","name":"Kent Reliance Building Society","group":"Kent Reliance"},{"id":"leeds","name":"Leeds Building Society","group":"Leeds"},{"id":"leek-united","name":"Leek United Building Society","group":"Leek"},{"id":"loughborough","name":"Loughborough Building Society","group":"Loughborough"},{"id":"mansfield","name":"Mansfield Building Society","group":"Mansfield"},{"id":"market-harborough","name":"Market Harborough Building Society","group":"Market Harborough"},{"id":"marsden","name":"Marsden Building Society","group":"Marsden"},{"id":"melton-mowbray","name":"Melton Mowbray Building Society","group":"Melton"},{"id":"monmouthshire","name":"Monmouthshire Building Society","group":"Monmouthshire"},{"id":"national-provincial","name":"National & Provincial Building Society","group":"National & Provincial"},{"id":"nationwide","name":"Nationwide Building Society","group":"Nationwide"},{"id":"newbury","name":"Newbury Building Society","group":"Newbury"},{"id":"newcastle","name":"Newcastle Building Society","group":"Newcastle"},{"id":"nottingham","name":"Nottingham Building Society","group":"Nottingham"},{"id":"penrith","name":"Penrith Building Society","group":"Penrith"},{"id":"principality","name":"Principality Building Society","group":"Principality"},{"id":"progressive","name":"Progressive Building Society","group":"Progressive"},{"id":"saffron","name":"Saffron Building Society","group":"Saffron"},{"id":"scottish","name":"Scottish Building Society","group":"Scottish"},{"id":"skipton","name":"Skipton Building Society","group":"Skipton"},{"id":"stafford","name":"Stafford Railway Building Society","group":"Stafford"},{"id":"suffolk","name":"Suffolk Building Society","group":"Suffolk"},{"id":"swansea","name":"Swansea Building Society","group":"Swansea"},{"id":"teachers","name":"Teachers Building Society","group":"Teachers"},{"id":"tipton-coseley","name":"Tipton & Coseley Building Society","group":"Tipton & Coseley"},{"id":"vernon","name":"Vernon Building Society","group":"Vernon"},{"id":"west-bromwich","name":"West Bromwich Building Society","group":"West Bromwich"},{"id":"woolwich","name":"Woolwich Building Society","group":"Woolwich"},{"id":"yorkshire","name":"Yorkshire Building Society","group":"Yorkshire"}];
+
+const WIP_GROUPS   = new Set(["Darlington","Dudley","Earl Shilton","Ecology","Family","Furness","Hanley","Harpenden","Hinckley & Rugby","Leeds","Leek","Loughborough","Mansfield","Market Harborough","Marsden","Melton","Monmouthshire","Nationwide"]);
+const PLANNED_GROUPS = new Set(["Newbury","Newcastle","Nottingham","Penrith","Principality","Progressive","Saffron","Scottish","Skipton","Stafford","Suffolk","Swansea","Teachers","Tipton & Coseley","Vernon","West Bromwich","Yorkshire","Abbey National","Alliance & Leicester","Birmingham Midshires","Bradford & Bingley","Cheltenham & Gloucester","Halifax","National & Provincial","Woolwich","Kent Reliance"]);
+
+function setupSearch(inputId, resultsId) {
+  const input = document.getElementById(inputId);
+  const results = document.getElementById(resultsId);
+  if (!input) return;
+
+  input.addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    if (!q) { results.classList.remove('open'); return; }
+    const matches = SOCIETIES.filter(s => s.name.toLowerCase().includes(q)).slice(0, 10);
+    if (matches.length === 0) {
+      results.innerHTML = '<div class="search-no-results">No societies found</div>';
+    } else {
+      results.innerHTML = matches.map(s => {
+        if (WIP_GROUPS.has(s.group)) {
+          return `<div class="search-result-item" onclick="showWipModal(event)" style="cursor:pointer;color:var(--muted)">${s.name} <span style="font-size:0.72em;opacity:0.7">in progress</span></div>`;
+        }
+        if (PLANNED_GROUPS.has(s.group)) {
+          return `<div class="search-result-item" onclick="showPlannedModal(event)" style="cursor:pointer;color:var(--muted)">${s.name} <span style="font-size:0.72em;opacity:0.7">coming soon</span></div>`;
+        }
+        return `<a href="societies/${s.id}.html" class="search-result-item">${s.name}</a>`;
+      }).join('');
+    }
+    results.classList.add('open');
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { results.classList.remove('open'); this.blur(); }
+    if (e.key === 'Enter') {
+      const first = results.querySelector('a.search-result-item');
+      if (first) first.click();
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#' + inputId) && !e.target.closest('#' + resultsId)) {
+      results.classList.remove('open');
+    }
+  });
+}
+
+setupSearch('header-search', 'header-search-results');
+
+// Keyboard shortcut: / focuses header search
+document.addEventListener('keydown', function(e) {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('header-search').focus();
+  }
+});
+
+// Mobile nav
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('header')) document.getElementById('mobile-nav').classList.remove('open');
+});
+
+// Modals
+function showWipModal(e) { e.preventDefault(); document.getElementById('wip-modal').style.display='flex'; }
+function showPlannedModal(e) { e.preventDefault(); document.getElementById('planned-modal').style.display='flex'; }
+['wip-modal','planned-modal'].forEach(function(id) {
+  document.getElementById(id).addEventListener('click', function(e) {
+    if (e.target === this) this.style.display='none';
+  });
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('wip-modal').style.display='none';
+    document.getElementById('planned-modal').style.display='none';
+  }
+});
+</script>
+</body>
+</html>
